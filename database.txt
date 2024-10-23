@@ -1,0 +1,128 @@
+
+
+-- สร้างตาราง prefix
+CREATE TABLE prefix (
+    id SERIAL PRIMARY KEY,
+    prefix VARCHAR(50)
+);
+
+-- สร้างตาราง curriculum
+CREATE TABLE curriculum (
+    id SERIAL PRIMARY KEY,
+    curr_name_en VARCHAR(255),
+    short_name_en VARCHAR(150)
+);
+
+-- สร้างตาราง section
+CREATE TABLE section (
+    id SERIAL PRIMARY KEY,
+    section VARCHAR(50)
+);
+
+-- สร้างตาราง student
+CREATE TABLE student (
+    id BIGINT PRIMARY KEY,
+    prefix_id INTEGER REFERENCES prefix(id),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    date_of_birth DATE,
+    sex CHAR(1),
+    curriculum_id INTEGER REFERENCES curriculum(id),
+    previous_school VARCHAR(255),
+    address TEXT,
+    telephone VARCHAR(50),
+    email VARCHAR(255),
+    line_id VARCHAR(255),
+    status VARCHAR(50)
+);
+
+-- สร้างตาราง student_list สำหรับเก็บความสัมพันธ์ระหว่าง student และ section
+CREATE TABLE student_list (
+    id SERIAL PRIMARY KEY,
+    section_id INTEGER REFERENCES section(id),
+    student_id BIGINT  REFERENCES student(id),
+    active_date DATE,
+    status VARCHAR(50)
+);
+
+
+
+
+----------------------------------------------------
+
+
+
+
+INSERT INTO prefix (prefix)
+VALUES ('Mr.'), ('Ms.');
+
+
+
+INSERT INTO curriculum (curr_name_en, short_name_en)
+VALUES
+    ('Computer Science', 'CS'),
+    ('Information Technology', 'IT');
+
+
+INSERT INTO section (section)
+VALUES ('Section 1'), ('Section 2');
+
+
+
+INSERT INTO student (id, prefix_id, first_name, last_name, date_of_birth, sex, curriculum_id, previous_school, address, telephone, email, line_id, status)
+VALUES
+(655021001129, 1, 'Natthaphon', 'Kanghae', '2001-08-08', 'M', 1, 'Wachiratham Sabeam', 'onnut 17', '0941523692', 'guy@example.com', 'guy', 'Active'),
+(655021001210, 1, 'Nawawee', 'Uma', '2001-12-08', 'M', 1, 'Wachiratham Sabeam', 'onnut 7', '0921723692', 'wee@example.com', 'wee', 'Active'),
+(655021001236, 1, 'Panthep', 'Kaewmanee', '2001-08-07', 'M', 1, 'Wachiratham Sabeam', 'onnut 35', '0948742692', 'zev@example.com', 'zev', 'Active'),
+(655021001251, 1, 'PhanPhet', 'Onbueng', '2001-05-17', 'M', 1, 'Wachiratham Sabeam', 'onnut 45', '0297725492', 'omo@example.com', 'omo', 'Active'),
+(655021001327, 1, 'Waranchai', 'Weethong', '2001-08-25', 'M', 1, 'Wat Dai', 'onnut 59', '0698725492', 'kong@example.com', 'kong', 'Active'),
+(655021001343, 2, 'Sirinalak', 'Sawangchan', '2001-06-23', 'F', 1, 'Moew D', 'onnut 60', '0898725492', 'bill@example.com', 'bill', 'Active'),
+(655021001376, 1, 'Sophonwit', 'Suchinthawong', '2001-05-02', 'M', 1, 'Wat Nong beam', 'onnut 45', '0698755492', 'ping@example.com', 'ping', 'Active'),
+(655021000899, 1, 'Thanakorn', 'Sombat Sathaporn', '2000-01-15', 'G', 2, 'Wachiratham Sabeam', 'onnut 5', '0812345678', 'beam@example.com', 'beamza', 'Active'),
+(655021001061, 1, 'Wutthipat', 'Ounmuang', '2001-05-20', 'M', 2, 'Wat Nong Ngu Hao', 'onnut 5', '0898765432', 'sub@example.com', 'om', 'Active'),
+(655021001145, 1, 'Natthaphong', 'Leelasantitham', '2001-04-30', 'M', 2, 'Wat Nong shrimp', 'onnut 52', '0865455001', 'sum@example.com', 'ssum', 'Active'),
+(655021001160, 2, 'Thanawan', 'Rattanaurai', '2001-01-03', 'F', 2, 'Moew D', 'onnut 17', '08798725432', 'nun@example.com', 'nun', 'Active'),
+(655021001178, 1, 'Thanyathorn', 'Ekaphonchaicharoen', '2000-09-03', 'M', 2, 'Wat Dai', 'onnut 11', '0648765422', 'glass@example.com', 'gls', 'Active'),
+(655021001202, 1, 'Nawatmon', 'Kasaprakorn', '2000-08-10', 'M', 2, 'Wat Dai', 'onnut 11', '06485265432', 'palm@example.com', 'palm', 'Active'),
+(655021001285, 2, 'Muthita', 'Suebsangad', '2001-08-02', 'F', 2, 'Moew D', 'onnut 55', '0598725492', 'cream@example.com', 'cream', 'Active'),
+(655021001319, 1, 'Rujipas', 'Chanta', '2001-02-05', 'M', 2, 'sarad', 'onnut 22', '0198735492', 'ru@example.com', 'ru', 'Active'),
+(655021001350, 2, 'Sirilak', 'Kluaynoi', '2001-01-13', 'F', 2, 'Moew D', 'onnut 54', '0495725492', 'mild@example.com', 'mlid', 'Active'),
+(655021001426, 1, 'Natthawut', 'Buntaew', '2001-01-31', 'M', 2, 'Wat Dai', 'onnut 1', '0962755492', 'tar@example.com', 'tar', 'Active'),
+(655021001467, 1, 'Kittisak', 'Supaporn', '2001-08-02', 'M', 2, 'Moew D', 'onnut 55', '0938575492', 'bas@example.com', 'bas', 'Active'),
+(655021001509, 1, 'Piticha', 'Thongrod', '2001-04-02', 'M', 2, 'Wachiratham Sabeam', 'onnut 44', '0642072255', 'icha@example.com', 'toh', 'Active'),
+(655021001525, 1, 'Yotphon', 'Thongthep', '2001-05-23', 'M', 2, 'soma beam', 'onnut 12', '0894521451', 'ohm@example.com', 'ohm', 'Active'),
+(655021001533, 1, 'Rueangchai', 'Prathanarat', '2001-09-19', 'M', 2, 'Wachiratham Sabeam', 'onnut 50', '0542164862', 'nu@example.com', 'nu', 'Active');
+
+
+
+
+INSERT INTO student_list (section_id, student_id, active_date, status)
+VALUES
+    (1,655021001129, '2024-01-01', 'Active'),
+    (1,655021001210, '2024-01-01', 'Active'),
+    (1,655021001236, '2024-01-01', 'Active'),
+    (1,655021001251, '2024-01-01', 'Active'),
+    (1,655021001327, '2024-01-01', 'Active'),
+    (1,655021001343, '2024-01-01', 'Active'),
+    (1,655021001376, '2024-01-01', 'Active'),
+    (2,655021000899, '2024-01-01', 'Active'),
+    (2,655021001061, '2024-01-01', 'Active'),
+    (2,655021001145, '2024-01-01', 'Active'),
+    (2,655021001160, '2024-01-01', 'Active'),
+    (2,655021001178, '2024-01-01', 'Active'),
+    (2,655021001202, '2024-01-01', 'Active'),
+    (2,655021001285, '2024-01-01', 'Active'),
+    (2,655021001319, '2024-01-01', 'Active'),
+    (2,655021001350, '2024-01-01', 'Active'),
+    (2,655021001426, '2024-01-01', 'Active'),
+    (2,655021001467, '2024-01-01', 'Active'),
+    (2,655021001509, '2024-01-01', 'Active'), 
+    (2,655021001525, '2024-01-01', 'Active'),
+    (2,655021001533, '2024-01-01', 'Active');
+
+
+
+
+
+
+
